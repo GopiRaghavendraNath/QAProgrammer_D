@@ -1,0 +1,141 @@
+{
+	"id": "1376d57a-7def-0262-4f3c-94f53c51d9aa",
+	"name": "Katana Client Side API ",
+	"description": "",
+	"order": [
+		"6376bad4-079c-589d-1edd-9fda50ddc157",
+		"d8590631-b11d-9ca3-194f-a5446c90a5dc",
+		"cb79743e-f99c-ba00-845f-fc1ca3d92e54"
+	],
+	"folders": [],
+	"folders_order": [],
+	"timestamp": 1592881040977,
+	"owner": "3036925",
+	"public": false,
+	"requests": [
+		{
+			"id": "6376bad4-079c-589d-1edd-9fda50ddc157",
+			"headers": "Authorization: Basic {{api_key}}\nContent-Type: application/x-www-form-urlencoded\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Basic {{api_key}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/x-www-form-urlencoded",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{oauth2_url}}/oauth2/token?grant_type=client_credentials&scope=transactions/get",
+			"queryParams": [
+				{
+					"key": "grant_type",
+					"value": "client_credentials",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "scope",
+					"value": "transactions/get",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": null,
+			"dataMode": "params",
+			"tests": "var jsonData = pm.response.json();\npm.environment.set(\"access_token\", jsonData['access_token']);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1592888372199,
+			"name": "Create an access token",
+			"description": "",
+			"collectionId": "1376d57a-7def-0262-4f3c-94f53c51d9aa",
+			"responses": []
+		},
+		{
+			"id": "cb79743e-f99c-ba00-845f-fc1ca3d92e54",
+			"headers": "authorization: Bearer {{access_token}}\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "authorization",
+					"value": "Bearer {{access_token}}",
+					"description": ""
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": ""
+				}
+			],
+			"url": "{{api_url}}/v1/transactions?transaction_id={{transaction_id}}",
+			"queryParams": [
+				{
+					"key": "transaction_id",
+					"value": "{{transaction_id}}",
+					"equals": true,
+					"description": "",
+					"enabled": true
+				}
+			],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "GET",
+			"data": null,
+			"dataMode": "params",
+			"tests": null,
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1592894185714,
+			"name": "Get the transaction",
+			"description": "",
+			"collectionId": "1376d57a-7def-0262-4f3c-94f53c51d9aa",
+			"responses": []
+		},
+		{
+			"id": "d8590631-b11d-9ca3-194f-a5446c90a5dc",
+			"headers": "Authorization: Bearer {{access_token}}\nContent-Type: application/json\n",
+			"headerData": [
+				{
+					"key": "Authorization",
+					"value": "Bearer {{access_token}}",
+					"description": "",
+					"enabled": true
+				},
+				{
+					"key": "Content-Type",
+					"value": "application/json",
+					"description": "",
+					"enabled": true
+				}
+			],
+			"url": "{{api_url}}/v1/transactions",
+			"queryParams": [],
+			"preRequestScript": null,
+			"pathVariables": {},
+			"pathVariableData": [],
+			"method": "POST",
+			"data": [],
+			"dataMode": "raw",
+			"tests": "var jsonData = pm.response.json();\npm.environment.set(\"transaction_id\", jsonData['transaction_id']);",
+			"currentHelper": "normal",
+			"helperAttributes": {},
+			"time": 1596507964401,
+			"name": "Create a transaction",
+			"description": "",
+			"collectionId": "1376d57a-7def-0262-4f3c-94f53c51d9aa",
+			"responses": [],
+			"rawModeData": "{\n    \"name\": \"test\",\n    \"reference\": \"reference\",\n    \"redirect_url_success\": \"http://google.com\",\n    \"redirect_url_exit\": \"http://google.com\",\n    \"phone_region_code\": \"61\",\n    \"phone_number\": \"00000000\",\n    \"notifications\": {\n        \"complete\": [\n            {\n                \"type\": \"https\",\n                \"url\": \"https://example.com/auth\",\n                \"auth_header_name\": \"Authorization\",\n                \"auth_header_value\": \"Basic dXNlcm5hbWU6cGFzc3dvcmQ=\"\n            }\n        ]\n    }\n}"
+		}
+	]
+}
